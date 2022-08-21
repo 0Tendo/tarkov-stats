@@ -7,7 +7,7 @@ mon = input()
 print("enter the day: ")
 day = input()
 
-file = 'C:\Battlestate Games\Logs\log_YR.MM.DD*\\2021.MM.DD*application.log'
+file = 'C:\Battlestate Games\Logs\log_YR.MM.DD*\\YR.MM.DD*application.log'
 file = file.replace('YR', yr, 4)
 file = file.replace('MM', mon, 2)
 file = file.replace('DD', day, 2)
@@ -36,22 +36,24 @@ while i < file_size:
                 t = int(line[12])
                 u = int(line[14])
                 v = int(line[15])
-                i = s*1000 + t*100 + u*10 + v
-                #if i-i2 > 2 and i-i2 < 50:
-                print ("game time: ", i-i2)
+                j = s*1000 + t*100 + u*10 + v
+                total = j-j2
+                if (t != t2):
+                    total = total-40
+                print ("game time: ", total)
                 check = 0
             if check == 3:
                 check = 2
-            #if check == 4:
-            #    check = 3
+            if check == 4:
+                check = 3
             if check == 1:
                 s2 = int(line[11])
                 t2 = int(line[12])
                 u2 = int(line[14])
                 v2 = int(line[15])
-                i2 = s2*1000 + t2*100 + u2*10 + v2
-                check = 3
-            if 'Info|application|GameStarting' in line:
+                j2 = s2*1000 + t2*100 + u2*10 + v2
+                check = 4
+            if 'GameStarted:' in line:
                 check = 1
                 
     i +=1
