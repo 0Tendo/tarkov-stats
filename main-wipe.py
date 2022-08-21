@@ -1,4 +1,14 @@
 import glob
+import re
+
+
+def find_location(orig_str = "Unknown"):
+    found = re.search('.*Location: (.+?),.*', orig_str)
+    if found:
+        new_str = found.group(1)
+        return new_str
+    else:
+        return "error finding map"
 
 print("enter the year: ")
 yr = input()
@@ -40,7 +50,7 @@ while i < file_size:
                 total = j-j2
                 if (t != t2):
                     total = total-40
-                print ("game time: ", total)
+                print ("game time: ", total, "mins\n")
                 check = 0
             if check == 3:
                 check = 2
@@ -53,6 +63,9 @@ while i < file_size:
                 v2 = int(line[15])
                 j2 = s2*1000 + t2*100 + u2*10 + v2
                 check = 4
+            if 'Location: ' in line:
+                loc = find_location(line)
+                print ("location: ", loc)
             if 'GameStarted:' in line:
                 check = 1
                 
